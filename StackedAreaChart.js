@@ -14,6 +14,21 @@ export default function StackedAreaChart(container) {
     .attr("height", height + margin.top + margin.bottom);
   const g = svg.append("g").classed(".chart-svg", true);
 
+  svg
+  .append("rect")
+  .attr("x", 0)
+  .attr("width", margin.left)
+  .attr("y", 0)
+  .attr("height", margin.top + height + margin.bottom - 15)
+  .attr("fill", "rgb(255, 255, 255)");
+svg
+  .append("rect")
+  .attr("x", margin.left + width)
+  .attr("width", margin.right)
+  .attr("y", 0)
+  .attr("height", margin.top + height + margin.bottom - 14)
+  .attr("fill", "rgb(255, 255, 255)");
+
   const xScale = d3.scaleTime().range([1, width]);
   const yScale = d3.scaleLinear().range([height, 0]);
   const colorScale = d3.scaleOrdinal().range(d3.schemeCategory10);
@@ -30,21 +45,6 @@ export default function StackedAreaChart(container) {
     .attr("class", "axis y-axis")
     .attr("transform", `translate(${margin.left}, ${margin.top})`)
     .call(yAxis);
-
-  svg
-    .append("rect")
-    .attr("x", 0)
-    .attr("width", margin.left)
-    .attr("y", 0)
-    .attr("height", margin.top + height + margin.bottom - 15)
-    .attr("fill", "rgb(255, 255, 255)");
-  svg
-    .append("rect")
-    .attr("x", margin.left + width)
-    .attr("width", margin.right)
-    .attr("y", 0)
-    .attr("height", margin.top + height + margin.bottom - 14)
-    .attr("fill", "rgb(255, 255, 255)");
 
   const area = d3
     .area()
